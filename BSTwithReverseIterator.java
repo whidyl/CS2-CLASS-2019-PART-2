@@ -1,4 +1,4 @@
-package Liang.chpt25;
+package ch8;
 import java.util.ListIterator;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
@@ -46,50 +46,37 @@ public class BSTwithReverseIterator <E extends Comparable<E>> extends BST<E>{
         }
 
         /** Recursive inorder traversal from a subtree */
-        public void inorder(TreeNode root) {
-          if (root == null)
-              return;
-          else {
-          /*
-          To be completed by student.
-          */
-          }
+        public void inorder(TreeNode<E> root) {
+            if (root == null) return;
+
+            if (root.left != null) inorder(root.left);
+            list.add(root.element);
+            if (root.right != null) inorder(root.right);
         }
         @Override /** More elements for traversing? */
         public boolean hasNext() {
-          if (current < (list.size()))
-            return true;
-
-          return false;
+            return current < (list.size());
         }
 
         @Override /** Get the current element and move to the next */
         public E next() {
-          if (current < (list.size()))
-          /*
-          To be completed by student.
-          */
-            return E; // E is a place holder 
+          if (current < (list.size())) {
+              current++;
+              return(list.get(current-1));
+          }
           else
               throw(new NoSuchElementException("Referencing beyond end of tree"));
         }
 
         @Override /** Remove the current element */
         public void remove() {
-         /*
-          To be completed by student.
-          Here are the steps:
-            1. Delete the current element
-            2. Clear the list
-            3. Rebuild the list
-         */
+            delete(list.get(current));
+            list.clear();
+            inorder();
         }
 
         public boolean hasPrevious() {
-          if (current > 0)
-            return true;
-
-          return false;
+            return current > 0;
         }
 
         public E previous() {
