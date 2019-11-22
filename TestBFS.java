@@ -21,20 +21,19 @@ public class TestBFS {
       {11, 8}, {11, 9}, {11, 10}
     };
 
-    Graph<String> graph = new UnweightedGraph<>(vertices, edges);
-    UnweightedGraph<String>.SearchTree bfs = 
-      graph.bfs(graph.getIndex("Chicago")); 
+    UnweightedGraphWithNonrecursiveDFS<String> graph = new UnweightedGraphWithNonrecursiveDFS<>(vertices, edges);
+    UnweightedGraph<String>.SearchTree dfs = graph.dfs("Chicago");
 
-    java.util.List<Integer> searchOrders = bfs.getSearchOrder();
-    System.out.println(bfs.getNumberOfVerticesFound() +
+    java.util.List<Integer> searchOrders = dfs.getSearchOrder();
+    System.out.println(dfs.getNumberOfVerticesFound() +
       " vertices are searched in this order:");
     for (int i = 0; i < searchOrders.size(); i++)
       System.out.println(graph.getVertex(searchOrders.get(i)));
 
     for (int i = 0; i < searchOrders.size(); i++)
-      if (bfs.getParent(i) != -1)
+      if (dfs.getParent(i) != -1)
         System.out.println("parent of " + graph.getVertex(i) + 
-          " is " + graph.getVertex(bfs.getParent(i)));
+          " is " + graph.getVertex(dfs.getParent(i)));
   }
 }
 
